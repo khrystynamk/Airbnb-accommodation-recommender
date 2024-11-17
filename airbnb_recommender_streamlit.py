@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 st.set_page_config(page_title='Airbnb New York Listings Recommender', page_icon=':house:', layout='wide', initial_sidebar_state='auto')
@@ -54,7 +55,7 @@ img_vectors = np.array(listings['photo_vector'].tolist())
 listings['polarity'] = listings['polarity'].apply(lambda x: convert_str_to_array(x))
 polarity = np.array(listings['polarity'].tolist())
 
-desc_cosine_sim = calculate_cosine_similarity(tfidf_matrix)
+desc_cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 img_cosine_sim = calculate_cosine_similarity(img_vectors)
 polarity_cosine_sim = calculate_cosine_similarity(polarity)
 
