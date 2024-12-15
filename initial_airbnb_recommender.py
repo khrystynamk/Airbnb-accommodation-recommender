@@ -35,7 +35,7 @@ def weighted_sum_similarities(description_similarity, image_similarity, polarity
     # image_sim = image_similarity / np.max(image_similarity)
     # polarity_sim = polarity_similarity / np.max(polarity_similarity)
 
-    weights = [0.5, 0.3, 0.2] # change weights
+    weights = [0.5, 0.3, 0.2]
     final_similarity = (weights[0] * image_similarity +
                         weights[1] * polarity_similarity +
                         weights[2] * description_similarity)
@@ -61,19 +61,19 @@ polarity_cosine_sim = calculate_cosine_similarity(polarity)
 
 final_sim = weighted_sum_similarities(desc_cosine_sim, img_cosine_sim, polarity_cosine_sim)
 
-# def recommend_listings(cosine_sim, listings, idx, top_n):
-#     if idx < 0 or idx >= len(cosine_sim):
-#         return ["Invalid listing ID!"]
+def get_recommendations(cosine_sim, listings, listing_index, k=5, similarity_threshold=0.9):
+    similarity_scores = cosine_sim[listing_index]
     
-#     score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=False)
-#     top_n_indexes = list(score_series.iloc[1 : top_n + 1].index)
-#     recommendations = listings.iloc[top_n_indexes][['id', 'name', 'description', 'picture_url', 'price']]
+    similar_indices = np.argsort(similarity_scores)[::-1]
     
-#     return recommendations
-
-def get_recommendations(cosine_sim, listings, listing_index, k=5):
-    similar_indices = np.argsort(cosine_sim[listing_index])[::-1][1:k+1]
-    recommended_listings = listings.iloc[similar_indices][['id', 'name', 'description', 'picture_url', 'price']]
+    filtered_indices = [
+        idx for idx in similar_indices
+        if idx != listing_index and similarity_scores[idx] < similarity_threshold
+    ]
+    
+    top_indices = filtered_indices[:k]
+    recommended_listings = listings.iloc[top_indices][['id', 'name', 'description', 'picture_url', 'price']]
+    
     return recommended_listings
 
 # 19783
