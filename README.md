@@ -4,13 +4,9 @@ This project provides a recommendation system for New York Airbnb accommodations
 
 The dataset used for this project was collected from [Inside Airbnb](https://insideairbnb.com/get-the-data/).  
 
----
-
 ## 📥 **Dataset**  
 
-The full prepared dataset can be accessed using this [link](https://drive.google.com/file/d/1XB4J599--eWhnTLb07Tssy2Gvibwn1zZ/view?usp=drive_link).  
-
----
+The full prepared dataset can be accessed using this [link](https://drive.google.com/file/d/1XB4J599--eWhnTLb07Tssy2Gvibwn1zZ/view?usp=drive_link).
 
 ## 🚀 **How to Use**  
 
