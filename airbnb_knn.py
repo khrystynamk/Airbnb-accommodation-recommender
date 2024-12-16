@@ -34,8 +34,8 @@ st.sidebar.header('User Input Features')
 listing_names = listings['name'].tolist()
 selected_listing_name = st.sidebar.selectbox('Select a listing by name', listing_names)
 
-# selected_listing_index = listings[listings['name'] == selected_listing_name].index[0]
-selected_listing_index = 25 # 25, 19853, 20253
+selected_listing_index = listings[listings['name'] == selected_listing_name].index[0]
+# selected_listing_index = 25 # 25, 19853, 20253
 
 st.header('Listing Name')
 st.success(listings['name'][selected_listing_index])
